@@ -12,7 +12,7 @@ class Orders(APIView):
     """
     Вью создания заказа
     """
-
+    permission_classes = [IsAuthenticated]
     def post(self, request: Request, *args, **kwargs):
         products_in_order = [(item["id"], item["count"], item["price"]) for item in request.data]
         products = Product.objects.filter(id__in=[item[0] for item in products_in_order])
